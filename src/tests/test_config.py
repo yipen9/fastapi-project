@@ -1,4 +1,7 @@
-import tests.base_import as base_import
+import base_import as base_import
 import src.config as config
 
-print(config.database_url)
+print(config.DATABASE_URL)
+
+
+print(config.get_conf("DATABASE_URL1","1234"))
