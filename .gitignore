@@ -1,3 +1,6 @@
 .env
 /fastapi
 /logs
+data.db
+/src/__pycache__
+/src/**/__pycache__
