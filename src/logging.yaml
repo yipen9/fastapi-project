@@ -1,0 +1,37 @@
+version: 1
+disable_existing_loggers: false
+
+formatters:
+  default:
+    format: "%(asctime)s - %(name)s - %(filename)s:%(lineno)d - %(levelname)s  - %(message)s"
+  error:
+    format: "%(asctime)s - %(name)s - %(filename)s:%(lineno)d - %(levelname)s  - %(message)s"
+
+handlers:
+  info_file_handler:
+    class: logging.handlers.TimedRotatingFileHandler
+    filename: "logs/info.log" # 日志文件路径
+    when: "midnight" # 每天午夜轮换
+    backupCount: 7 # 保留最近的7个备份
+    formatter: default
+    level: INFO
+    encoding: "utf-8" # 指定编码
+
+  error_file_handler:
+    class: logging.handlers.TimedRotatingFileHandler
+    filename: "logs/error.log" # 日志文件路径
+    when: "midnight" # 每天午夜轮换
+    backupCount: 7 # 保留最近的7个备份
+    formatter: error
+    level: ERROR
+    encoding: "utf-8"
+
+loggers:
+  uvicorn:
+    level: INFO
+    handlers: [info_file_handler, error_file_handler]
+    propagate: no
+
+root:
+  level: INFO
+  handlers: [info_file_handler, error_file_handler]
