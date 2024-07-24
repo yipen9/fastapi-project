@@ -1,4 +1,7 @@
-翻译来自：[https://github.com/zhanymkanov/fastapi-best-practices/blob/master/README.md](https://github.com/zhanymkanov/fastapi-best-practices/blob/master/README.md)<br />这是我在创业公司中使用的最佳实践和惯例的观点列表。在过去的几年生产中，我们做出了好坏参半的决策，这些决策对我们的开发人员体验产生了巨大的影响。其中一些值得分享。
+翻译来自：[https://github.com/zhanymkanov/fastapi-best-practices/blob/master/README.md]fastapi-best-practices<br />
+基于上面文档的建议，创建的demo项目，包含使用fastapi,sqlite,mysql。其中mysql的使用为异步。相关依赖的包
+在src/requirements/dev.txt
+
 <a name="PXcoJ"></a>
 
 # 项目结构
