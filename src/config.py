@@ -1,6 +1,7 @@
  # global configs
 import os
 from dotenv import dotenv_values
+from urllib.parse import quote_plus as urlquote
 
 
 def __load_env():
@@ -28,3 +29,13 @@ SQLALCHEMY_ENGINE_OPTIONS = {
         'pool_recycle': 1800,      # 连接被回收前的存活时间（秒）
         'connect_args': {'check_same_thread': False}  # SQLite 特有参数
     }
+
+# DATABASE_URL = "mysql+aiomysql://username:password@localhost/dbname"
+def get_mysql_url():
+    username = get_conf("MYSQL_USER")
+    password = urlquote(get_conf("MYSQL_PASSWORD"))
+    url = get_conf("MYSQL_DATABASE_URL")
+    port = get_conf("MYSQL_PORT")
+    dbname = get_conf("MYSQL_DATABASE")
+    database_url = f"mysql+aiomysql://{username}:{password}@{url}:{port}/{dbname}"
+    return database_url

@@ -1,12 +1,11 @@
  # db models
-from database import engine,Base
-from sqlalchemy.orm import declarative_base
+from database import SqliteBase
 from sqlalchemy import Column, Integer, Text
 
 
 
-# SQLAlchemy ORM 模型  
-class UserDB(Base):
+# SQLAlchemy ORM 模型 
+class UserDB(SqliteBase):
     __tablename__ = 'users'
     id = Column(Integer, primary_key=True, index=True,autoincrement=True)
     username = Column(Text,nullable=False,index=True)

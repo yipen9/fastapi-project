@@ -6,7 +6,7 @@ from fastapi import APIRouter, Query , Path,Body,Cookie , Header,HTTPException
 from pydantic import BaseModel,Field
 import auth.schemas as auth_schemas
 import auth.service as auth_service
-from database import get_sqlite_db
+import auth.dependencies as auth_dependencies
 from sqlalchemy.orm import Session
 from fastapi import Depends
 import logging
@@ -17,7 +17,7 @@ auth_router = APIRouter(prefix='/auth')
 
 
 @auth_router.post("/create",response_model=auth_schemas.UserVo)
-def create_user(user:auth_schemas.User,db:Session= Depends(get_sqlite_db)):
+def create_user(user:auth_schemas.User,db:Session= Depends(auth_dependencies.get_sqlite_db)):
     logger.info(f"user:{user.model_dump()}")
     logger.error(f"user:{user.model_dump()}")
     try:
@@ -31,7 +31,7 @@ def create_user(user:auth_schemas.User,db:Session= Depends(get_sqlite_db)):
 
 
 @auth_router.get("/get/{username}",response_model=auth_schemas.UserVo)
-def get_user(username:str,db:Session= Depends(get_sqlite_db)):
+def get_user(username:str,db:Session= Depends(auth_dependencies.get_sqlite_db)):
     db_user = auth_service.get_user_by_name(username,db)
     if not db_user:
         raise HTTPException(status_code=404,detail="User not found")

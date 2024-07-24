@@ -8,10 +8,11 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from  auth.router import auth_router
-
+from goods.router import good_router
 
 app = FastAPI(title='Fastapi Project',version='1.0.0',docs_url='/api/docs',redoc_url='/api/redoc')
 app.include_router(auth_router)
+app.include_router(good_router)
 
 
 script_dir = os.path.dirname(os.path.abspath(__file__))

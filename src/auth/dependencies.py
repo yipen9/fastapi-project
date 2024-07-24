@@ -16,6 +16,7 @@
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from passlib.context import CryptContext
 from pydantic import BaseModel
+from database import SqliteSessionLocal
 # 实例化OAuth2PasswordBearer，用于OAuth 2.0密码流程的安全依赖项。
 # 用于在路径操作函数中接收OAuth 2.0密码流程生成的访问令牌。
 # 一个路径操作函数依赖于它，它则会去调用/token(tokenUrl参数的值)路径装饰的操作函数，取回token。
@@ -36,3 +37,11 @@ def verify_password(plain_password, hashed_password):
 # 对密码进行hash加密，这里没有使用。password是明文密码。
 def get_password_hash(password):
     return pwd_context.hash(password)
+
+
+def get_sqlite_db():
+    db = SqliteSessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
