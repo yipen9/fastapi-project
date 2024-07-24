@@ -1,6 +1,6 @@
-翻译来自：[https://github.com/zhanymkanov/fastapi-best-practices/blob/master/README.md]fastapi-best-practices<br />
-基于上面文档的建议，创建的demo项目，包含使用fastapi,sqlite,mysql。其中mysql的使用为异步。相关依赖的包
-在src/requirements/dev.txt
+翻译来自：[fastapi-best-practices](https://github.com/zhanymkanov/fastapi-best-practices/blob/master/README.md)<br />
+基于上面文档的建议，创建的 demo 项目，包含使用 fastapi,sqlite,mysql。其中 mysql 的使用为异步。相关依赖的包
+在 src/requirements/dev.txt
 
 <a name="PXcoJ"></a>
 
