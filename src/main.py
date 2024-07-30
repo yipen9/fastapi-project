@@ -9,8 +9,22 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from  auth.router import auth_router
 from goods.router import good_router
+from fastapi.exceptions import RequestValidationError  
+from exceptions import validate_error_exception_handler,http_exception_handler,default_exception_handler
+from fastapi import Request, HTTPException 
+from pydantic import ValidationError
 
 app = FastAPI(title='Fastapi Project',version='1.0.0',docs_url='/api/docs',redoc_url='/api/redoc')
+
+app.add_exception_handler(ValueError, validate_error_exception_handler)
+app.add_exception_handler(ValidationError, validate_error_exception_handler)
+app.add_exception_handler(RequestValidationError, validate_error_exception_handler)
+app.add_exception_handler(HTTPException, http_exception_handler)
+app.add_exception_handler(Exception, default_exception_handler)
+
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+
 app.include_router(auth_router)
 app.include_router(good_router)
 
