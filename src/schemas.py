@@ -1,6 +1,7 @@
 from datetime import datetime
 from zoneinfo import ZoneInfo
 from pytz import timezone
+from typing import Optional,Any
 
 from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel, ConfigDict
@@ -23,3 +24,11 @@ class CustomModel(BaseModel):
         """Return a dict which contains only serializable fields."""
         default_dict = self.model_dump()
         return jsonable_encoder(default_dict)
+    
+
+    
+class ResponseModel(CustomModel):
+    success: bool = True
+    code: int = 200
+    data:Optional[Any] = None
+    message: Optional[str] = None

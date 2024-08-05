@@ -13,7 +13,7 @@ from fastapi.exceptions import RequestValidationError
 from exceptions import validate_error_exception_handler,http_exception_handler,default_exception_handler
 from fastapi import Request, HTTPException 
 from pydantic import ValidationError
-
+import utils
 app = FastAPI(title='Fastapi Project',version='1.0.0',docs_url='/api/docs',redoc_url='/api/redoc')
 
 app.add_exception_handler(ValueError, validate_error_exception_handler)
@@ -22,7 +22,8 @@ app.add_exception_handler(RequestValidationError, validate_error_exception_handl
 app.add_exception_handler(HTTPException, http_exception_handler)
 app.add_exception_handler(Exception, default_exception_handler)
 
-app.mount("/static", StaticFiles(directory="static"), name="static")
+static_files = utils.get_abs_path("src","static")
+app.mount("/static", StaticFiles(directory=static_files), name="static")
 
 
 app.include_router(auth_router)
